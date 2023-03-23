@@ -18,7 +18,7 @@ RUN apt update \
     # xdebugのインストール
     && pecl install xdebug \
     && docker-php-ext-enable xdebug
-    
+
 # Composerのインストール & パス通す
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -28,4 +28,4 @@ RUN apt install -y npm \
     && n stable
 
 # RUN , CMD , ENTRYPOINT , COPY , ADD を実行する時のワーキングディレクトリを指定
-WORKDIR /var/www
+WORKDIR /var/www/umarche

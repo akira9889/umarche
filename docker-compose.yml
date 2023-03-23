@@ -7,7 +7,7 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - ./:/var/www
+      - ./umarche:/var/www/umarche
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./log:/var/log
 
