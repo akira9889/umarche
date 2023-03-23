@@ -29,3 +29,4 @@ RUN apt install -y npm \
 
 # RUN , CMD , ENTRYPOINT , COPY , ADD を実行する時のワーキングディレクトリを指定
 WORKDIR /var/www/umarche
+CMD ["npm run dev"]
