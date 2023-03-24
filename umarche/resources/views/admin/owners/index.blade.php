@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <section class="text-gray-600 body-font">
                         <div class="container px-5 mx-auto">
+                            <x-flash-message status="info" />
                             <div class="flex justify-end mb4">
                                 <button
                                 onclick="location.href='{{ route('admin.owners.create') }}'"
