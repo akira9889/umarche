@@ -35,6 +35,24 @@ class OwnerSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'created_at' => '2023/03/24 09:38'
             ],
+            [
+                'name' => 'test4',
+                'email' => 'test4@test4.com',
+                'password' => Hash::make('password'),
+                'created_at' => '2023/03/24 09:38'
+            ],
+            [
+                'name' => 'test5',
+                'email' => 'test5@test5.com',
+                'password' => Hash::make('password'),
+                'created_at' => '2023/03/24 09:38'
+            ],
+            [
+                'name' => 'test6',
+                'email' => 'test6@test6.com',
+                'password' => Hash::make('password'),
+                'created_at' => '2023/03/24 09:38'
+            ],
         ]);
     }
 }
