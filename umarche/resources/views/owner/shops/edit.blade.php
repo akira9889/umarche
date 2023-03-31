@@ -14,6 +14,7 @@
                         @csrf
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
+                                <x-input-error :messages="$errors->get('image')" class="mt-2" />
                                 <div class="relative">
                                     <label for="image" class="leading-7 text-sm text-gray-600">画像</label>
                                     <input type="file" id="image" name="image" accept="image/png,image/jpeg,image/jpg"
