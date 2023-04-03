@@ -23,10 +23,18 @@ class UploadImageRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'image' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'files.*image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            'files.*.image' => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
+
+        if (\Route::currentRouteName() === 'owner.images.store') {
+            $rules = array_merge($rules, [
+                'files' => 'required',
+            ],);
+        }
+
+        return $rules;
     }
 
     public function messages()
@@ -34,7 +42,8 @@ class UploadImageRequest extends FormRequest
         return [
             'image' => '指定されたファイルが画像ではありません。',
             'mimes' => '指定された拡張子(jpg/jpeg/png)ではありません。',
-            'image' => 'ファイルサイズは2MB以内にしてください。'
+            'max' => 'ファイルサイズは2MB以内にしてください。',
+            'files.*.image.max' => '個々のファイルサイズは2MB以内にしてください。'
         ];
     }
 }

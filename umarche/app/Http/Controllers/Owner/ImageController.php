@@ -62,7 +62,7 @@ class ImageController extends Controller
      */
     public function store(UploadImageRequest $request)
     {
-        $imageFiles = $request->file('file');
+        $imageFiles = $request->file('files');
         if (!is_null($imageFiles)) {
             foreach ($imageFiles as $imageFile) {
                 $fileNameToStore = ImageService::upload($imageFile, 'products');
