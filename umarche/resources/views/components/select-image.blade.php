@@ -24,7 +24,7 @@
             <main class="modal__content" id="{{ $modal }}-content">
                 <div class="flex flex-wrap">
                     @foreach ($images as $image)
-                        <div class="w-1/4 p-2 md:p-4">
+                        <div class="w-1/4 p-2 md:p-4 border-4 border-transparent">
                             <div class="border rouded-md p-2 md:p-4">
                                 <img class="image" data-id="{{ $name }}_{{ $image->id }}"
                                     data-file="{{ $image->filename }}"

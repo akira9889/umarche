@@ -113,6 +113,17 @@
         const images = document.querySelectorAll('.image')
 
         images.forEach(image => {
+            const parentDiv = image.parentElement.parentElement;
+            parentDiv.addEventListener('mouseover', () => {
+                parentDiv.classList.remove('border-transparent');
+                parentDiv.classList.add('border-indigo-500');
+            })
+
+            parentDiv.addEventListener('mouseout', () => {
+                parentDiv.classList.add('border-transparent');
+                parentDiv.classList.remove('border-indigo-500');
+            })
+
             image.addEventListener('click', function(e) {
                 const imageName = e.target.dataset.id.substr(0, 6)
                 const imageId = e.target.dataset.id.replace(imageName + '_', '')
@@ -123,6 +134,7 @@
                 document.getElementById(imageName + '_hidden').value = imageId
                 document.getElementById(modal + '_close').click();
             }, )
+
         })
     </script>
 </x-app-layout>
