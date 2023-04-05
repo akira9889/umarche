@@ -43,7 +43,9 @@ class ProductController extends Controller
     public function index()
     {
         // $products = Owner::findOrFail(Auth::id())->shop->product;
-        $ownerInfo = Owner::with('shop.product.imageFirst')->where('id', Auth::id())->first();
+        $ownerInfo = Owner::with('shop.product.imageFirst')
+        ->where('id', Auth::id())
+        ->first();
 
         return view('owner.products.index', compact('ownerInfo'));
     }
