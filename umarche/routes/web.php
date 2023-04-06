@@ -37,7 +37,7 @@ Route::middleware('auth:users')->group(function () {
 });
 
 Route::middleware('auth:users')->group(function () {
-    Route::get('/', [ItemController::class, 'index'])->name('user.index');
+    Route::get('/', [ItemController::class, 'index'])->name('items.index');
 });
 
 require __DIR__.'/auth.php';
