@@ -12,6 +12,7 @@
                     <form action="{{ route('owner.shops.update', ['shop' => $shop->id]) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
