@@ -143,7 +143,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
-        if ($request->current_quantity !== $quantity) { 
+        if ($request->current_quantity !== $quantity) {
             $id = $request->route()->parameter('product');
             return redirect()->route('owner.products.edit', ['product' => $id])
                 ->with(['message' => '在庫数が変更されています。再度確認してください', 'status' => 'alert']);
@@ -163,12 +163,12 @@ class ProductController extends Controller
                     $product->is_selling = $request->is_selling;
                     $product->save();
 
-                    if ($request->type === '1') {
+                    if ($request->type === \Constant::PRODUCT_LIST['add']) {
                         $newQuantity = $request->quantity;
-                    } elseif ($request->type === '2') {
+                    } elseif ($request->type === \Constant::PRODUCT_LIST['reduce']) {
                         $newQuantity = $request->quantity * -1;
                     }
-
+                    
                     Stock::create([
                         'product_id' => $product->id,
                         'type' => $request->type,
