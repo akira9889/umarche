@@ -18,32 +18,36 @@
                                 <div class="swiper-wrapper">
                                     <!-- Slides -->
                                     <div class="swiper-slide">
-                                      @if ($product->imageFirst->filename)
-                                        <img src="{{ asset('storage/products'.'/'.$product->imageFirst->filename) }}" alt="">
-                                      @else
-                                        <img src="" alt="">
-                                      @endif
+                                        @if ($product->imageFirst->filename)
+                                            <img src="{{ asset('storage/products' . '/' . $product->imageFirst->filename) }}"
+                                                alt="">
+                                        @else
+                                            <img src="" alt="">
+                                        @endif
                                     </div>
                                     <div class="swiper-slide">
-                                      @if ($product->imageSecond->filename)
-                                        <img src="{{ asset('storage/products'.'/'.$product->imageSecond->filename) }}" alt="">
-                                      @else
-                                        <img src="" alt="">
-                                      @endif
+                                        @if ($product->imageSecond->filename)
+                                            <img src="{{ asset('storage/products' . '/' . $product->imageSecond->filename) }}"
+                                                alt="">
+                                        @else
+                                            <img src="" alt="">
+                                        @endif
                                     </div>
                                     <div class="swiper-slide">
-                                      @if ($product->imageThird->filename)
-                                        <img src="{{ asset('storage/products'.'/'.$product->imageThird->filename) }}" alt="">
-                                      @else
-                                        <img src="" alt="">
-                                      @endif
+                                        @if ($product->imageThird->filename)
+                                            <img src="{{ asset('storage/products' . '/' . $product->imageThird->filename) }}"
+                                                alt="">
+                                        @else
+                                            <img src="" alt="">
+                                        @endif
                                     </div>
                                     <div class="swiper-slide">
-                                      @if ($product->imageFourth->filename)
-                                        <img src="{{ asset('storage/products'.'/'.$product->imageFourth->filename) }}" alt="">
-                                      @else
-                                        <img src="" alt="">
-                                      @endif
+                                        @if ($product->imageFourth->filename)
+                                            <img src="{{ asset('storage/products' . '/' . $product->imageFourth->filename) }}"
+                                                alt="">
+                                        @else
+                                            <img src="" alt="">
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- If we need pagination -->
