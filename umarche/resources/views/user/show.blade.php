@@ -11,18 +11,64 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="md:flex md:justify-around">
                         <div class="md:w-1/2">
-                            <x-thumbnail filename="{{ $product->imageFirst->filename ?? '' }}" type="products" />
+                            {{-- <x-thumbnail filename="{{ $product->imageFirst->filename ?? '' }}" type="products" /> --}}
+                            <!-- Slider main container -->
+                            <div class="swiper">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    <div class="swiper-slide">
+                                      @if ($product->imageFirst->filename)
+                                        <img src="{{ asset('storage/products'.'/'.$product->imageFirst->filename) }}" alt="">
+                                      @else
+                                        <img src="" alt="">
+                                      @endif
+                                    </div>
+                                    <div class="swiper-slide">
+                                      @if ($product->imageSecond->filename)
+                                        <img src="{{ asset('storage/products'.'/'.$product->imageSecond->filename) }}" alt="">
+                                      @else
+                                        <img src="" alt="">
+                                      @endif
+                                    </div>
+                                    <div class="swiper-slide">
+                                      @if ($product->imageThird->filename)
+                                        <img src="{{ asset('storage/products'.'/'.$product->imageThird->filename) }}" alt="">
+                                      @else
+                                        <img src="" alt="">
+                                      @endif
+                                    </div>
+                                    <div class="swiper-slide">
+                                      @if ($product->imageFourth->filename)
+                                        <img src="{{ asset('storage/products'.'/'.$product->imageFourth->filename) }}" alt="">
+                                      @else
+                                        <img src="" alt="">
+                                      @endif
+                                    </div>
+                                </div>
+                                <!-- If we need pagination -->
+                                <div class="swiper-pagination"></div>
+
+                                <!-- If we need navigation buttons -->
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+
+                                <!-- If we need scrollbar -->
+                                <div class="swiper-scrollbar"></div>
+                            </div>
                         </div>
                         <div class="md:w-1/2">
-                            <h2 class="mb-4 text-sm title-font text-gray-500 tracking-widest">{{ $product->category->name }}
+                            <h2 class="mb-4 text-sm title-font text-gray-500 tracking-widest">
+                                {{ $product->category->name }}
                             </h2>
                             <h1 class="mb-4 text-gray-900 text-3xl title-font font-medium">{{ $product->name }}</h1>
                             <p class="mb-4 leading-relaxed">{{ $product->information }}</p>
                             <div class="flex justify-around items-center">
-                              <div>
-                                <span class="title-font font-medium text-2xl text-gray-900">{{ number_format($product->price) }}</span>
-                                <span class="text-sm text-gray">円(税込)</span>
-                              </div>
+                                <div>
+                                    <span
+                                        class="title-font font-medium text-2xl text-gray-900">{{ number_format($product->price) }}</span>
+                                    <span class="text-sm text-gray">円(税込)</span>
+                                </div>
                                 <div class="flex items-center">
                                     <span class="mr-3">数量</span>
                                     <div class="relative">

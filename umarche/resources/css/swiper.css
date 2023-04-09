@@ -1,0 +1,19 @@
+.swiper {
+  height: 300px;
+}
+
+.swiper-slide {
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.swiper-slide img {
+  display: inline;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  align-self: center;
+}
