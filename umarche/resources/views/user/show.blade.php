@@ -61,13 +61,13 @@
                                 <div class="swiper-scrollbar"></div>
                             </div>
                         </div>
-                        <div class="md:w-1/2">
+                        <div class="md:w-1/2 md:pl-4 flex flex-col">
                             <h2 class="mb-4 text-sm title-font text-gray-500 tracking-widest">
                                 {{ $product->category->name }}
                             </h2>
                             <h1 class="mb-4 text-gray-900 text-3xl title-font font-medium">{{ $product->name }}</h1>
                             <p class="mb-4 leading-relaxed">{{ $product->information }}</p>
-                            <div class="flex justify-around items-center">
+                            <div class="flex justify-around items-center mt-auto">
                                 <div>
                                     <span
                                         class="title-font font-medium text-2xl text-gray-900">{{ number_format($product->price) }}</span>
@@ -90,7 +90,43 @@
                             </div>
                         </div>
                     </div>
+                    <div class="border-t border-gray-400 my-8"></div>
+                    <div class="mb-4 text-center">この商品を販売しているショップ</div>
+                    <div class="mb-4 text-center">{{ $product->shop->name }}</div>
+                    <div class="mb-4 text-center">
+                        @if ($product->shop->filename)
+                            <img class="mx-auto w-40 h-40 rounded-full object-cover"
+                                src="{{ asset('storage/shops' . '/' . $product->shop->filename) }}" alt="">
+                        @else
+                            <img src="" alt="">
+                        @endif
+                    </div>
+                    <div class="mb-4 text-center">
+                        <button type="button" data-micromodal-trigger="modal-1" href='javascript:;'
+                            class="text-white bg-gray-400 border-0 py-2 px-6 focus:outline-none hover:bg-gray-500 rounded">ショップの詳細を見る</button>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+        <div class="modal__overlay z-50" tabindex="-1" data-micromodal-close>
+            <div class="modal__container w-1/2" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                    <h2 class="text-sl text-gray-700 modal__title" id="modal-1-title">
+                        {{ $product->shop->name }}
+                    </h2>
+                    <button type="button" class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content" id="modal-1-content">
+                    <p>
+                        {{ $product->shop->information }}
+                    </p>
+                </main>
+                <footer class="modal__footer">
+                    <button type="button" class="modal__btn" data-micromodal-close
+                        aria-label="Close this dialog window">閉じる</button>
+                </footer>
             </div>
         </div>
     </div>

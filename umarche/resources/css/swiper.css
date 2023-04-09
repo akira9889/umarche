@@ -1,5 +1,5 @@
 .swiper {
-  height: 300px;
+  height: 330px;
 }
 
 .swiper-slide {
@@ -12,8 +12,25 @@
 
 .swiper-slide img {
   display: inline;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   max-height: 100%;
   align-self: center;
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  bottom: 0 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #fff !important;
+}
+
+.swiper-button-prev {
+  color: #fff !important;
+}
+
+.swiper-button-next {
+  color: #fff !important;
 }
