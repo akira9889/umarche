@@ -63,7 +63,7 @@ class CartController extends Controller
             $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
             if ($product->pivot->quantity > $quantity) {
-                return redirect()->route('user.cart.index')->with(['message' => '在庫数がなくなりました。', 'status' => 'alert']);;
+                return redirect()->route('user.cart.index')->with(['message' => '在庫がなくなりました。', 'status' => 'alert']);;
             } else {
                 $lineItem = [
                     'quantity' => $product->pivot->quantity,

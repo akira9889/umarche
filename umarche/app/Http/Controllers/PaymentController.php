@@ -34,13 +34,12 @@ class PaymentController extends Controller
         //Stripe決済画面までいき、30分経っても決済がない場合、確保した在庫を戻す
         if ($event->type == 'checkout.session.expired') {
             $session = $event->data->object;
-            $items = $session->display_items;
-
-            Stock::create([
-                    'product_id' => 101,
-                    'type' => \Constant::PRODUCT_LIST['add'],
-                    'quantity' => 2,
-                ]);
+            logger()->debug($session);
+            // Stock::create([
+            //         'product_id' => 101,
+            //         'type' => \Constant::PRODUCT_LIST['add'],
+            //         'quantity' => 2,
+            //     ]);
 
             // foreach ($items as $item) {
             //     // 在庫テーブルの在庫数を増やす
