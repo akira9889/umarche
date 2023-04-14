@@ -81,7 +81,6 @@ class CartController extends Controller
                 ];
                 array_push($lineItems, $lineItem);
             }
-
         }
 
         //Stripe決済画面に行く前に在庫を確保
@@ -118,16 +117,6 @@ class CartController extends Controller
 
     public function cancel()
     {
-        $user = User::findOrFail(Auth::id());
-
-        foreach ($user->products as $product) {
-            Stock::create([
-                'product_id' => $product->id,
-                'type' => \Constant::PRODUCT_LIST['add'],
-                'quantity' => $product->pivot->quantity,
-            ]);
-        }
-
         return redirect()->route('user.cart.index');
     }
 }

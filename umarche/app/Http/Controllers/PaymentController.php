@@ -31,24 +31,24 @@ class PaymentController extends Controller
             return response()->json('Invalid signature', 400);
         }
 
-        //Stripe決済画面までいき、30分経っても決済がない場合、確保した在庫を戻す
+        //Stripe決済画面に遷移し、30分経っても決済がない場合、確保しておいた在庫を戻す
         if ($event->type == 'checkout.session.expired') {
             $session = $event->data->object;
-            logger()->debug($session);
-            // Stock::create([
-            //         'product_id' => 101,
-            //         'type' => \Constant::PRODUCT_LIST['add'],
-            //         'quantity' => 2,
-            //     ]);
 
-            // foreach ($items as $item) {
-            //     // 在庫テーブルの在庫数を増やす
-            //     Stock::create([
-            //         'product_id' => $item->id,
-            //         'type' => \Constant::PRODUCT_LIST['add'],
-            //         'quantity' => $item->pivot->quantity,
-            //     ]);
-            // }
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+            $line_items = $stripe->checkout->sessions->allLineItems($session->id, ['expand' => ['data.price.product']]);
+
+            foreach ($line_items as $line_item) {
+                $metadata = $line_item->price->product->metadata;
+                $product_id = $metadata->product;
+                $quantity = $line_item->quantity;
+
+                Stock::create([
+                    'product_id' => $product_id,
+                    'type' => \Constant::PRODUCT_LIST['add'],
+                    'quantity' => $quantity
+                ]);
+            }
         }
 
         return response()->json('ok', 200);
