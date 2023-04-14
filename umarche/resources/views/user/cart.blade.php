@@ -6,6 +6,14 @@
     </x-slot>
 
     <div class="py-12">
+        {{-- @if (session()->has('line_items'))
+        @foreach (session('line_items') as $line_item)
+        <p>{{$line_item['quantity']}}</p>
+
+        @endforeach
+
+      @endif --}}
+        <x-flash-message status="session('status')" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -49,7 +57,7 @@
                             <button onclick="location.href='{{ route('user.cart.checkout') }}'"
                                 class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">購入する</button>
                         </div>
-                        @else
+                    @else
                         <p>商品が入っていません。</p>
                     @endif
                 </div>

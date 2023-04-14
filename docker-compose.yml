@@ -57,3 +57,11 @@ services:
     image: schickling/mailcatcher
     ports:
       - 1080:1080
+
+  ngrok:
+    container_name: ngrok
+    image: wernight/ngrok:latest
+    ports:
+      - ${NGROK_PORT:-4040}:4040
+    environment:
+      NGROK_PORT: web-dl:80

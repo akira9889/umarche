@@ -48,6 +48,9 @@ Route::prefix('cart')->middleware('auth:users')->group(function () {
     Route::post('delete/{item}', [CartController::class, 'delete'])->name('cart.delete');
     Route::get('checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('success', [CartController::class, 'success'])->name('cart.success');
+    Route::get('cancel', [CartController::class, 'cancel'])->name('cart.cancel');
 });
+
+Route::post('/payment/webhook', [App\Http\Controllers\PaymentController::class, 'webhook'])->name('payment.webhook');
 
 require __DIR__.'/auth.php';

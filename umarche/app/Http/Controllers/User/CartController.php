@@ -63,7 +63,7 @@ class CartController extends Controller
             $quantity = Stock::where('product_id', $product->id)->sum('quantity');
 
             if ($product->pivot->quantity > $quantity) {
-                return redirect()->route('user.cart.index');
+                return redirect()->route('user.cart.index')->with(['message' => '在庫数がなくなりました。', 'status' => 'alert']);;
             } else {
                 $lineItem = [
                     'quantity' => $product->pivot->quantity,
@@ -73,6 +73,9 @@ class CartController extends Controller
                         'product_data' => [
                             'name' => $product->name,
                             'description' => $product->information,
+                            'metadata' => [
+                                'product' => $product->id
+                            ]
                         ],
                     ],
                 ];
@@ -80,8 +83,8 @@ class CartController extends Controller
             }
 
         }
-        // dd($lineItems);
 
+        //Stripe決済画面に行く前に在庫を確保
         foreach($products as $product) {
             Stock::create([
                 'product_id' => $product->id,
@@ -90,16 +93,15 @@ class CartController extends Controller
             ]);
         }
 
-        // dd('test');
-
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         header('Content-Type: application/json');
 
         $session = \Stripe\Checkout\Session::create([
             'line_items' => [$lineItems],
             'mode' => 'payment',
+            'expires_at' => time() + (1800),
             'success_url' => route('user.cart.success'),
-            'cancel_url' => route('user.cart.index'),
+            'cancel_url' => route('user.cart.cancel'),
         ]);
 
         $publicKey = env('STRIPE_PUBLIC_KEY');
@@ -112,5 +114,20 @@ class CartController extends Controller
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index');
+    }
+
+    public function cancel()
+    {
+        $user = User::findOrFail(Auth::id());
+
+        foreach ($user->products as $product) {
+            Stock::create([
+                'product_id' => $product->id,
+                'type' => \Constant::PRODUCT_LIST['add'],
+                'quantity' => $product->pivot->quantity,
+            ]);
+        }
+
+        return redirect()->route('user.cart.index');
     }
 }
