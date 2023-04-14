@@ -5,6 +5,7 @@ use App\Http\Controllers\ComponentTestController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ItemController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,6 @@ Route::prefix('cart')->middleware('auth:users')->group(function () {
     Route::get('cancel', [CartController::class, 'cancel'])->name('cart.cancel');
 });
 
-Route::post('/payment/webhook', [App\Http\Controllers\PaymentController::class, 'webhook'])->name('payment.webhook');
+Route::post('/payment/webhook', [PaymentController::class, 'webhook'])->name('payment.webhook');
 
 require __DIR__.'/auth.php';
