@@ -9,12 +9,15 @@ RUN apt update \
     # vimをインストール
     # MariaDBデータベースのクライアントアプリケーションである「mysql」を使えるように「mariadb-client」をインストール
     # libzip-devはzip圧縮時に必要となるライブラリ(libzip は、zlib を使用する)
-    && apt install -y zlib1g-dev mariadb-client vim libzip-dev \
+    && apt install -y mariadb-client vim zlib1g-dev libzip-dev libpng-dev libjpeg62-turbo-dev\
     # docker-php-ext-installはPHPに標準で備わっている拡張パッケージのインストール＆有効化ができるコマンド
     # PDO_MYSQL は、PHP から MySQL データベースへのアクセスを可能にするための PHP Data Objects (PDO) インターフェイス を実装したドライバ。
     && docker-php-ext-install zip pdo_mysql \
     # gitのインストール
     && apt install -y git \
+    #gdのインストール
+    && docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
     # xdebugのインストール
     && pecl install xdebug \
     && docker-php-ext-enable xdebug
