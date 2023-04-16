@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendThanksMail;
+use App\Jobs\SendOrderMail;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
@@ -109,6 +112,16 @@ class CartController extends Controller
 
     public function success()
     {
+        $items = Cart::where('user_id', Auth::id())->get();
+        $products = CartService::getItemsInCart($items);
+        $user = User::findOrFail(Auth::id());
+
+        SendThanksMail::dispatch($user, $products);
+
+        foreach ($products as $product) {
+            SendOrderMail::dispatch($user, $product);
+        }
+
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index');
