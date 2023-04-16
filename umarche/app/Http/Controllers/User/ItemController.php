@@ -9,8 +9,9 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\PrimaryCategory;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendThanksMail;
 use App\Mail\Testmail;
+use Illuminate\Support\Facades\Mail;
 
 class ItemController extends Controller
 {
@@ -35,7 +36,11 @@ class ItemController extends Controller
     {
         $categories = PrimaryCategory::with('secondary')->get();
 
-        Mail::to('test@example.com')->send(new Testmail());
+        //同期的に送信
+        // Mail::to('test@example.com')->send(new Testmail());
+
+        //非同期に送信
+        SendThanksMail::dispatch();
 
         $products = Product::availableItems()
         ->selectCategory($request->category ?? '0')
