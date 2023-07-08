@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use InterventionImage;
 use App\Services\ImageService;
 
-class Shopcontroller extends Controller
+class ShopController extends Controller
 {
     public function __construct()
     {

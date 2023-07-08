@@ -14,7 +14,7 @@ class PaymentController extends Controller
         $endpoint_secret = env('STRIPE_WEBHOOK');
 
         $payload = $request->getContent();
-        $sig_header = $request->hfeader('stripe-signature');
+        $sig_header = $request->header('stripe-signature');
 
         $event = null;
         try {
